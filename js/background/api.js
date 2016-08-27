@@ -24,6 +24,9 @@ export const tabs = {
 };
 
 export const windows = {
+  getCurrent(getInfo) {
+    return promisify(chromeWindows, 'getCurrent', getInfo);
+  },
   create(options) {
     return promisify(chromeWindows, 'create', options);
   }
@@ -31,6 +34,6 @@ export const windows = {
 
 export const sessions = {
   getRecentlyClosed() {
-    return promisify(chromeSessions, 'getRecentlyClosed')
+    return promisify(chromeSessions, 'getRecentlyClosed');
   }
 };

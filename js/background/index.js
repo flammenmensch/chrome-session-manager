@@ -12,10 +12,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
       return true;
     case 'save_session':
-      const title = `Session: ${new Date().toLocaleString()}`;
-      services.getCurrentTabs()
-        .then(tabs => services.saveSession(title, tabs))
-        .then(sendResponse);
+      const title = `Untitled`;
+      Promise.all([
+        services.getCurrentTabs(),
+        services.getCurrentWindow()
+      ]).then(results => {
+        const [ tabs, wnd ] = results;
+        const favicons = services.extractFaviconsFromTabs(tabs);
+        const urls = tabs.map(tab => tab.url);
+        return services.saveSession(title, urls, wnd.incognito, favicons)
+          .then(sendResponse);
+      });
       return true;
     case 'restore_session':
       services.restoreSession(message.id)

@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
+const ButtonBarButton = ({ children, onClick }) => {
+  return (
+    <button type="button" onClick={onClick}>{children}</button>
+  );
+};
+
 const ButtonBar = ({ children }) => {
   return (
     <menu className="button-bar">
@@ -9,32 +15,63 @@ const ButtonBar = ({ children }) => {
   );
 };
 ButtonBar.propTypes = {
-  children: PropTypes.arrayOf(Component)
+  children: PropTypes.arrayOf(ButtonBarButton)
 };
 ButtonBar.defaultProps = {
   children: []
 };
 
-
 const TopPanel = ({ onSave }) => {
   return (
     <div className="top-panel">
-      <h1 className="top-panel-title">Session Manager</h1>
+      <h1 className="top-panel-title">
+        Session Manager
+        <sup>&alpha;</sup>
+      </h1>
       <ButtonBar>
-        <button type="button" onClick={onSave}>Save current</button>
-        <button type="button">Settings</button>
+        <ButtonBarButton onClick={onSave}>Save current</ButtonBarButton>
+        <ButtonBarButton>Settings</ButtonBarButton>
       </ButtonBar>
     </div>
   );
 };
 
-const SessionListItem = ({ session, onRestore, onRemove }) => {
+const FavIconBar = ({ favicons }) => {
   return (
-    <div className="session-list-item">
-      <h3 className="session-list-item-title">{session.title} ({session.tabs.length} tabs)</h3>
+    <ul className="favicon-bar">
+      {favicons.map((url, index) => {
+        const style = {
+          'backgroundImage': `url(${url})`
+        };
+        return (
+          <li key={index}>
+            <i className="favicon" style={style}></i>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+/*
+FavIconBar.propTypes = {
+  icons: PropTypes.arrayOf(PropTypes.string)
+};*/
+FavIconBar.defaultProps = {
+  favicons: []
+};
+
+const SessionListItem = ({ session, onRestore, onRemove }) => {
+  const className = `session-list-item ${session.incognito ? 'session-list-item__incognito' : ''}`;
+  return (
+    <div className={className}>
+      <div>
+        <h3 className="session-list-item-title">{session.title} ({session.tabs.length} tabs)</h3>
+        <p className="session-list-item-date">{new Date(parseInt(session.lastModifiedDate)).toLocaleString()}</p>
+      </div>
+      <FavIconBar favicons={session.favicons} />
       <ButtonBar>
-        <button type="button" onClick={onRestore}>Restore</button>
-        <button type="button" onClick={onRemove}>Remove</button>
+        <ButtonBarButton onClick={onRestore}>Restore</ButtonBarButton>
+        <ButtonBarButton type="button" onClick={onRemove}>Remove</ButtonBarButton>
       </ButtonBar>
     </div>
   );
@@ -73,15 +110,12 @@ class App extends Component {
         <header>
           <TopPanel onSave={() => this.saveCurrentSession()} />
         </header>
-        <main className="scrollable">
-          <section>
-            <h2 className="section-header">User sessions</h2>
-            <SessionList
-              items={this.state.user}
-              onRestoreSession={id => this.restoreSession(id)}
-              onRemoveSession={id => this.removeSession(id)}
-            />
-          </section>
+        <main>
+          <SessionList
+            items={this.state.user}
+            onRestoreSession={id => this.restoreSession(id)}
+            onRemoveSession={id => this.removeSession(id)}
+          />
         </main>
       </div>
     )

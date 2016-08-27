@@ -7,19 +7,9 @@ html, body {
   height: 100%;
 }
 
-body {
-  overflow: hidden;
-}
-
 .app {
   width: 500px;
   height: 650px;
-  overflow: hidden;
-}
-
-.scrollable {
-  overflow-y: scroll;
-  height: 100%;
 }
 
 .top-panel {
@@ -93,10 +83,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-repeat: no-repeat;
+  background-position: 10px 50%;
+  background-image: url(assets/chrome.png);
+  padding-left: 38px;
 }
 
-.session-list > li:nth-child(2n) > .session-list-item {
-  background: #efefef;
+.session-list-item__incognito {
+  background-image: url(assets/incognito.png);
+}
+
+.session-list > li:nth-child(2n + 1) > .session-list-item {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .session-list-item-title {
@@ -104,14 +102,40 @@ body {
   overflow: hidden;
   white-space: nowrap;
   flex-grow: 1;
-  margin: 0;
+  margin: 10px 0;
   padding: 0;
 }
 
-.dot {
-  background-color: dodgerblue;
-  border-radius: 50%;
-  width: 10px;
-  height: 7px;
-  margin-right: 10px;
+.session-list-item-date {
+  color: rgba(0, 0, 0, 0.35);
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.favicon-bar {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.favicon-bar > li {
+  width: 18px;
+}
+
+.favicon {
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 16px;
+  display: inline-block;
+}
+
+.favicon-bar > li:last-child > .favicon {
+  opacity: 0.25;
+}
+
+.favicon-bar > li:nth-last-child(2) > .favicon {
+  opacity: 0.5;
 }

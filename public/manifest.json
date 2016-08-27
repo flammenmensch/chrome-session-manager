@@ -2,6 +2,7 @@
   "manifest_version": 2,
   "name": "Session Manager",
   "version": "1.0.0",
+  "version_name": "Alpha",
   "browser_action": {
     "default_title": "Save current session",
     "default_popup": "page-action.html"
@@ -11,6 +12,8 @@
     "persistent": false,
     "scripts": [ "background.bundle.js" ]
   },
+  "minimum_chrome_version": "49",
+  "incognito": "split",
   "permissions": [
     "sessions",
     "storage",
