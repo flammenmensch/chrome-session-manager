@@ -30,7 +30,7 @@ const TopPanel = ({ onSave, onOpenRecent }) => {
       </h1>
       <ButtonBar>
         <ButtonBarButton onClick={onSave}>Save current</ButtonBarButton>
-        <ButtonBarButton onClick={onOpenRecent}>Open recent</ButtonBarButton>
+        <ButtonBarButton onClick={onOpenRecent}>Open last</ButtonBarButton>
       </ButtonBar>
     </div>
   );
