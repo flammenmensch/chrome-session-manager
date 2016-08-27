@@ -1,0 +1,20 @@
+{
+  "appName": {
+    "message": "Session Manager"
+  },
+  "save_current": {
+    "message": "Save current"
+  },
+  "open_last": {
+    "message": "Open last"
+  },
+  "restore": {
+    "message": "Restore"
+  },
+  "remove": {
+    "message": "Remove"
+  },
+  "untitled": {
+    "message": "Untitled"
+  }
+}

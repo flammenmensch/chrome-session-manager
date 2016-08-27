@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Session Manager",
+  "name": "__MSG_appName__",
   "version": "1.0.0",
   "version_name": "Alpha",
+  "default_locale": "ru",
   "browser_action": {
     "default_title": "Save current session",
     "default_popup": "page-action.html"

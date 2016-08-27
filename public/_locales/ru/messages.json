@@ -1,0 +1,20 @@
+{
+  "appName": {
+    "message": "Менеджер сеансов"
+  },
+  "save_current": {
+    "message": "Сохр. текущую"
+  },
+  "open_last": {
+    "message": "Открыть последнюю"
+  },
+  "restore": {
+    "message": "Восстановить"
+  },
+  "remove": {
+    "message": "Удалить"
+  },
+  "untitled": {
+    "message": "Без названия"
+  }
+}

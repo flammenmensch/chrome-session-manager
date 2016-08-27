@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
       return true;
     case 'save_session':
-      const title = message.title || `Untitled`;
+      const title = message.title || chrome.i18n.getMessage('untitled');
       services.saveCurrentSession(title)
         .then(sendResponse);
       return true;

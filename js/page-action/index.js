@@ -25,12 +25,12 @@ const TopPanel = ({ onSave, onOpenRecent }) => {
   return (
     <div className="top-panel">
       <h1 className="top-panel-title">
-        Session Manager
+        {chrome.i18n.getMessage('appName')}
         <sup>&alpha;</sup>
       </h1>
       <ButtonBar>
-        <ButtonBarButton onClick={onSave}>Save current</ButtonBarButton>
-        <ButtonBarButton onClick={onOpenRecent}>Open last</ButtonBarButton>
+        <ButtonBarButton onClick={onSave}>{chrome.i18n.getMessage('save_current')}</ButtonBarButton>
+        <ButtonBarButton onClick={onOpenRecent}>{chrome.i18n.getMessage('open_last')}</ButtonBarButton>
       </ButtonBar>
     </div>
   );
@@ -70,8 +70,8 @@ const SessionListItem = ({ session, onRestore, onRemove }) => {
       </div>
       <FavIconBar favicons={session.favicons} />
       <ButtonBar>
-        <ButtonBarButton onClick={onRestore}>Restore</ButtonBarButton>
-        <ButtonBarButton type="button" onClick={onRemove}>Remove</ButtonBarButton>
+        <ButtonBarButton onClick={onRestore}>{chrome.i18n.getMessage('restore')}</ButtonBarButton>
+        <ButtonBarButton type="button" onClick={onRemove}>{chrome.i18n.getMessage('remove')}</ButtonBarButton>
       </ButtonBar>
     </div>
   );
@@ -125,7 +125,6 @@ class App extends Component {
   }
   getSessions() {
     chrome.runtime.sendMessage({ type: 'get_sessions' }, ({ user, recent }) => {
-      console.log(user, recent);
       this.setState({
         user: Array.isArray(user) ? user : [],
         recent: Array.isArray(recent) ? recent : []
