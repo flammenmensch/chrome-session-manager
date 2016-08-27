@@ -1,0 +1,117 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+.app {
+  width: 500px;
+  height: 650px;
+  overflow: hidden;
+}
+
+.scrollable {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.top-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  padding: 0 10px;
+}
+
+.top-panel-title {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+.button-bar {
+  list-style: none;
+  display: flex;
+}
+
+.button-bar > li > button {
+  padding: 5px 10px;
+  background: white;
+  outline: none;
+  border: 1px solid lightgrey;
+  border-right: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s linear;
+}
+
+.button-bar > li > button:hover {
+  background: lightgrey;
+}
+
+.button-bar > li:first-child > button {
+  border-radius: 3px 0 0 3px;
+  border-right: none;
+}
+
+.button-bar > li:last-child > button {
+  border-radius: 0 3px 3px 0;
+  border-right: 1px solid lightgrey;
+}
+
+.section-header {
+  margin: 15px 0 4px 0;
+  padding: 0 10px;
+}
+
+.section-header:after {
+  border-top: 1px dotted lightgrey;
+  width: 100%;
+  content: "";
+  display: block;
+  margin-top: 5px;
+}
+
+.session-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.session-list-item {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.session-list > li:nth-child(2n) > .session-list-item {
+  background: #efefef;
+}
+
+.session-list-item-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.dot {
+  background-color: dodgerblue;
+  border-radius: 50%;
+  width: 10px;
+  height: 7px;
+  margin-right: 10px;
+}

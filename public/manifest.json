@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Session Manager",
+  "version": "1.0.0",
+  "browser_action": {
+    "default_title": "Save current session",
+    "default_popup": "page-action.html"
+  },
+  "author": "Alexey Protasov",
+  "background": {
+    "persistent": false,
+    "scripts": [ "background.bundle.js" ]
+  },
+  "permissions": [
+    "sessions",
+    "storage",
+    "tabs"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "session-manager",
+  "version": "1.0.0",
+  "description": "Allows to store opened Chrome tabs and reopen them later all at once",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --watch --colors",
+    "build": "webpack --progress",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "tabs"
+  ],
+  "author": "Flammenmensch <maleventum@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "copy-webpack-plugin": "^3.0.1",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "shortid": "^2.2.6",
+    "webpack": "^1.13.2"
+  }
+}
