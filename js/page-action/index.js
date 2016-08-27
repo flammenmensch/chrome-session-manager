@@ -21,7 +21,7 @@ ButtonBar.defaultProps = {
   children: []
 };
 
-const TopPanel = ({ onSave }) => {
+const TopPanel = ({ onSave, onOpenRecent }) => {
   return (
     <div className="top-panel">
       <h1 className="top-panel-title">
@@ -30,7 +30,7 @@ const TopPanel = ({ onSave }) => {
       </h1>
       <ButtonBar>
         <ButtonBarButton onClick={onSave}>Save current</ButtonBarButton>
-        <ButtonBarButton>Settings</ButtonBarButton>
+        <ButtonBarButton onClick={onOpenRecent}>Open recent</ButtonBarButton>
       </ButtonBar>
     </div>
   );
@@ -45,7 +45,7 @@ const FavIconBar = ({ favicons }) => {
         };
         return (
           <li key={index}>
-            <i className="favicon" style={style}></i>
+            <i className="favicon" style={style} />
           </li>
         );
       })}
@@ -108,7 +108,10 @@ class App extends Component {
     return (
       <div className="app">
         <header>
-          <TopPanel onSave={() => this.saveCurrentSession()} />
+          <TopPanel
+            onSave={() => this.saveCurrentSession()}
+            onOpenRecent={() => this.openRecentSession()}
+          />
         </header>
         <main>
           <SessionList
@@ -122,6 +125,7 @@ class App extends Component {
   }
   getSessions() {
     chrome.runtime.sendMessage({ type: 'get_sessions' }, ({ user, recent }) => {
+      console.log(user, recent);
       this.setState({
         user: Array.isArray(user) ? user : [],
         recent: Array.isArray(recent) ? recent : []
@@ -140,6 +144,9 @@ class App extends Component {
     chrome.runtime.sendMessage({ type: 'remove_session', id }, () => {
       this.getSessions();
     });
+  }
+  openRecentSession() {
+    chrome.runtime.sendMessage({ type: 'get_recently_closed' }, () => {});
   }
 }
 

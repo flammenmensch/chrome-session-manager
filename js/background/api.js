@@ -18,6 +18,9 @@ export const storage = {
 };
 
 export const tabs = {
+  query(options) {
+    return promisify(chromeTabs, 'query', options)
+  },
   getAllInCurrentWindow() {
     return promisify(chromeTabs, 'query', { windowId: chromeWindows.WINDOW_ID_CURRENT });
   }
@@ -27,12 +30,18 @@ export const windows = {
   getCurrent(getInfo) {
     return promisify(chromeWindows, 'getCurrent', getInfo);
   },
+  get(windowId, getInfo) {
+    return promisify(chromeWindows, 'get', windowId, getInfo);
+  },
   create(options) {
     return promisify(chromeWindows, 'create', options);
   }
 };
 
 export const sessions = {
+  restore(sessionId) {
+    return promisify(chromeSessions, 'restore', sessionId);
+  },
   getRecentlyClosed() {
     return promisify(chromeSessions, 'getRecentlyClosed');
   }

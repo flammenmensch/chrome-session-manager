@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import * as api from './api';
 
-export function saveSession(title, tabs, incognito=false, favicons=[]) {
+export function saveSessionData(title, tabs, incognito=false, favicons=[]) {
   const id = shortid.generate();
   return api.storage.saveItem(id, {
     title,
@@ -23,6 +23,36 @@ export function getSessions() {
 
 export function getRecentlyClosed() {
   return api.sessions.getRecentlyClosed();
+}
+
+export function restoreLastSession() {
+  return api.sessions.restore();
+}
+
+export function saveSession(title, tabs, window) {
+  const favicons = extractFaviconsFromTabs(tabs);
+  const urls = tabs.map(tab => tab.url);
+  return saveSessionData(title, urls, window.incognito, favicons);
+}
+
+export function saveCurrentSession(title) {
+  return Promise.all([
+    getCurrentTabs(),
+    getCurrentWindow()
+  ]).then(results => {
+    const [ tabs, window ] = results;
+    return saveSession(title, tabs, window);
+  });
+}
+
+export function saveSessionForWindow(title, windowId) {
+  return Promise.all([
+    getTabsInWindow(windowId),
+    getWindow(windowId, { populate: true })
+  ]).then(results => {
+    const [ tabs, window ] = results;
+    return saveSession(title, tabs, window);
+  });
 }
 
 export function removeSession(id) {
@@ -49,8 +79,16 @@ export function getCurrentTabs() {
   return api.tabs.getAllInCurrentWindow();
 }
 
+export function getTabsInWindow(windowId) {
+  return api.tabs.query({ windowId });
+}
+
 export function getCurrentWindow() {
   return api.windows.getCurrent();
+}
+
+export function getWindow(windowId, getInfo) {
+  return api.windows.get(windowId, getInfo);
 }
 
 export function extractFaviconsFromTabs(tabs, max=6) {
